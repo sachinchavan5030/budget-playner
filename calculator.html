@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap By SKILLHUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <div class="card">
+                    <div class="card-header">calculator</div>
+                    <div class="card-body">
+                        <h1 id="root"></h1>
+                        <input type="text" class="w-100 form-control" placeholder="enter number" name="" id="num1">
+                        <input type="text" class="w-100 form-control my-3" placeholder="enter number" name="" id="num2">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="btn-group gap-2" role="group">
+                                    <button type="button" class="btn btn-primary">1</button>
+                                    <button type="button" class="btn btn-primary">2</button>
+                                    <button type="button" class="btn btn-primary">3</button>
+                                    <button type="button" class="btn btn-primary">4</button>
+                                    <button type="button" class="btn btn-primary">5</button>
+                                    <button type="button" class="btn btn-primary">6</button>
+                                    <button type="button" class="btn btn-primary">7</button>
+                                    <button type="button" class="btn btn-primary">8</button>
+                                    <button type="button" class="btn btn-primary">9</button>
+                                    <button type="button" class="btn btn-primary">0</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="btn-group w-100 gap-3 " role="group">
+                            <button onclick="calculat('+')" type="button" class="btn btn-outline-dark">+</button>
+                            <button onclick="calculat('-')" type="button" class="btn btn-outline-dark">-</button>
+                            <button onclick="calculat('*')" type="button" class="btn btn-outline-dark">*</button>
+                            <button onclick="calculat('/')" type="button" class="btn btn-outline-dark">/</button>
+                            <button onclick="calculat('%')" type="button" class="btn btn-outline-dark">%</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const a = document.getElementById("num1")
+        const b = document.getElementById("num2")
+        const c = document.getElementById("root")
+
+        const calculat = (arg) => {
+            const x = +a.value
+            const y = +b.value
+
+            switch (true) {
+                case arg === "+": c.innerHTML = x + y; break
+                case arg === "-": c.innerHTML = x - y; break
+                case arg === "*": c.innerHTML = x * y; break
+                case arg === "/": c.innerHTML = x / y; break
+                case arg === "%": c.innerHTML = x % y; break
+            }
+        }
+    </script>
+
+</body>
+
+</html>
