@@ -183,13 +183,14 @@
         const transport = document.getElementById("transport")
         const rent = document.getElementById("rent")
         const food = document.getElementById("food")
+        const ACCOUNTS = JSON.parse(localStorage.getItem("budget")) || []
 
-        const ACCOUNTS = [
-            { title: "project 1", amount: 25000, type: "income", category: "salary", note: "fake note" },
-            { title: "petrol", amount: 500, type: "expense", category: "transport", note: "xyz bike" },
-            { title: "pani puri", amount: 50, type: "expense", category: "food", note: "abc" },
-            { title: "pizza", amount: 50, type: "expense", category: "food", note: "pqr" },
-        ]
+        // const ACCOUNTS = [
+        //     { title: "project 1", amount: 25000, type: "income", category: "salary", note: "fake note" },
+        //     { title: "petrol", amount: 500, type: "expense", category: "transport", note: "xyz bike" },
+        //     { title: "pani puri", amount: 50, type: "expense", category: "food", note: "abc" },
+        //     { title: "pizza", amount: 50, type: "expense", category: "food", note: "pqr" },
+        // ]
 
         const handleAdd = () => {
             ACCOUNTS.splice(0, 0, {
@@ -199,6 +200,7 @@
                 category: category.value,
                 note: note.value
             })
+            localStorage.setItem("budget", JSON.stringify(ACCOUNTS))
 
             // reset 
             for (const item of [title, amount, type, category, note]) {
@@ -208,30 +210,31 @@
         }
 
         const display = (arg, cat) => {
-            let str = ``
+            let str = ``, i = 1
             const filteredData = ACCOUNTS
                 .filter(item => arg ? item.type === arg : item)
                 .filter(item => cat ? item.category === cat : item)
             for (const item of filteredData) {
                 str += `<tr class="${item.type === "expense" && 'table-danger'}">
-                            <td>3</td>
+                            <td>${i}</td>
                             <td>${item.title}</td>
                             <td class="${item.type === "income" && 'table-success'}">${item.amount}</td>
                             <td>${item.type}</td>
                             <td>${item.category}</td>
                             <td>${item.note}</td>
                         </tr>`
+                i++
             }
             document.getElementById("root").innerHTML = str
 
-            const totalincome = ACCOUNTS
+            const totalincome = (ACCOUNTS
                 .filter(item => item.type === "income")
-                .reduce((sum, item) => sum + item.amount, 0)
+                .reduce((sum, item) => sum + item.amount, 0)) || 0
 
-            const totalexpense = ACCOUNTS
+            const totalexpense = (ACCOUNTS
                 .filter(item => item.type === "expense")
                 .reduce((sum, item) => sum + item.amount, 0)
-
+            ) || 0
             const totalbalance = totalincome - totalexpense
             income.innerHTML = totalincome
             expense.innerHTML = totalexpense
